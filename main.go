@@ -7,10 +7,10 @@ import "fmt"
 var GitCommit string
 
 // Version
-var version string
+var Version string
 
 // HumanVersion version with commit
-var HumanVersion = fmt.Sprintf("%s-(%s)", version, GitCommit)
+var HumanVersion = fmt.Sprintf("%s-(%s)", Version, GitCommit)
 
 func main() {
 
