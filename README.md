@@ -19,3 +19,4 @@ git push --tags
 goreleaser build  --rm-dist
 ```
 
+**NOTE:** Cannot build on "dirty" git working dir
