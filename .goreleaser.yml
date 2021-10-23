@@ -19,7 +19,7 @@ builds:
       - arm
       - arm64
     ldflags:
-      - -X main.GitCommit={{ .ShortCommit} 
+      - -X main.GitCommit={{ .ShortCommit }} 
 archives:
   - replacements:
       darwin: Darwin
