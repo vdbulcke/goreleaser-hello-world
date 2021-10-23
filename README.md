@@ -20,3 +20,19 @@ goreleaser build  --rm-dist
 ```
 
 **NOTE:** Cannot build on "dirty" git working dir
+
+
+## Publishing 
+
+* Dry run
+```
+goreleaser release --skip-publish --rm-dist
+
+```
+
+* 
+
+**NOTE:** Need to set the Access token as env var
+```
+goreleaser release  --rm-dist
+```
