@@ -11,13 +11,13 @@ builds:
       - CGO_ENABLED=0
     goos:
       - linux
-      - windows
-      - darwin
+      # - windows
+      # - darwin
     goarch:
-      - 386
+      # - 386
       - amd64
-      - arm
-      - arm64
+      # - arm
+      # - arm64
     ldflags:
       - -X main.GitCommit={{ .ShortCommit }} -X main.Version={{ .Version }} 
 archives:
@@ -40,9 +40,12 @@ changelog:
 release:
   ## set github header and footer
   header: |
-    ## Some title ({{ .Date }})
+    ## Docker
 
-    Welcome to this new release!
+    repo: https://hub.docker.com/repository/docker/vdbulcke/cert-monitor/general
+    ```bash
+    docker pull vdbulcke/cert-monitor:0.3.0
+    ```
 
   # Footer template for the release body.
   # Defaults to empty.
