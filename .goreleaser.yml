@@ -9,17 +9,23 @@ builds:
   - main: "./main.go"
     env:
       - CGO_ENABLED=0
+   
     goos:
       - linux
-      # - windows
-      # - darwin
+      - darwin
+      - windows
     goarch:
-      # - 386
       - amd64
+      - arm64
       # - arm
-      # - arm64
+      # - 386
     ldflags:
-      - -X main.GitCommit={{ .ShortCommit }} -X main.Version={{ .Version }} 
+      ## auto inject commit and version at build time
+      -  -X github.com/vdbulcke/goreleaser-hello-world/main.GitCommit={{ .ShortCommit }} 
+      -  -X github.com/vdbulcke/goreleaser-hello-world/main.Version=v{{ .Version }}   
+      -  -X github.com/vdbulcke/goreleaser-hello-world/main.Date={{ .CommitDate }}
+      -  -X github.com/vdbulcke/goreleaser-hello-world/main.BuiltBy=goreleaser
+
 archives:
   - replacements:
       darwin: Darwin
@@ -40,6 +46,7 @@ changelog:
 
 dockers:
   - 
+    id: linux-amd64
     # GOOS of the built binaries/packages that should be used.
     goos: linux
 
@@ -49,18 +56,47 @@ dockers:
     # GOARM of the built binaries/packages that should be used.
     goarm: ''
 
+    dockerfile: Dockerfile
+
+    ## Mutli platform 
+    use: buildx
+    build_flag_templates:
+    - --platform=linux/amd64
+
     image_templates:
-    - "vdbulcke/test:{{ .Tag }}"
+    - "ghcr.io/vdbulcke/oidc-server:v{{ .Version }}"
+
+  - 
+    id: linux-arm64
+    # GOOS of the built binaries/packages that should be used.
+    goos: linux
+
+    # GOARCH of the built binaries/packages that should be used.
+    goarch: arm64
+
+    # GOARM of the built binaries/packages that should be used.
+    goarm: ''
+
+    dockerfile: Dockerfile
+
+    ## Mutli platform 
+    use: buildx
+    build_flag_templates:
+    - --platform=linux/arm64/v8
+
+    image_templates:
+    - "ghcr.io/vdbulcke/oidc-server-arm64:v{{ .Version }}"
+
 
 release:
-  ## set github header and footer
-  header: |
-    ## Docker
+  # ## set github header and footer
+  # header: |
+  #   ## Docker
 
-    repo: 
-    ```bash
-    docker pull vdbulcke/test:{{ .Tag }}
-    ```
+  #   repo: 
+  #   ```bash
+  #   docker pull vdbulcke/test:{{ .Tag }}
+  #   ```
 
   # Footer template for the release body.
   # Defaults to empty.

@@ -1,3 +1,3 @@
-module hello-world
+module github.com/vdbulcke/goreleaser-hello-world
 
-go 1.18
+go 1.19
