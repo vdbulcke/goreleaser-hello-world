@@ -64,7 +64,7 @@ dockers:
     - --platform=linux/amd64
 
     image_templates:
-    - "ghcr.io/vdbulcke/oidc-server:v{{ .Version }}"
+    - "ghcr.io/vdbulcke/goreleaser-hello-world:v{{ .Version }}"
 
   - 
     id: linux-arm64
@@ -85,7 +85,7 @@ dockers:
     - --platform=linux/arm64/v8
 
     image_templates:
-    - "ghcr.io/vdbulcke/oidc-server-arm64:v{{ .Version }}"
+    - "ghcr.io/vdbulcke/goreleaser-hello-world-arm64:v{{ .Version }}"
 
 
 release:
