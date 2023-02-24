@@ -1,8 +1,8 @@
 .PHONY: release-skip-publish
 release-skip-publish: 
-	goreleaser release --rm-dist --skip-publish 
+	goreleaser release --clean --skip-publish 
 
 .PHONY: release-snapshot
 release-snapshot: 
-	goreleaser release --rm-dist --skip-publish --snapshot
+	goreleaser release --clean --skip-publish --snapshot
 
