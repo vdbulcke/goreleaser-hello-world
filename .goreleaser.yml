@@ -59,7 +59,7 @@ changelog:
 signs:
   - cmd: cosign
     signature: "${artifact}.sig"
-    args: ["sign-blob", "--oidc-issuer=https://token.actions.githubusercontent.com", "--output-signature=${artifact}.sig", "${artifact}"]
+    args: ["sign-blob", "--oidc-issuer=https://token.actions.githubusercontent.com", "--output-certificate=${artifact}.pem",  "--output-signature=${artifact}.sig", "${artifact}"]
     artifacts: all
 
 dockers:
