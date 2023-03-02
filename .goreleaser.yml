@@ -56,6 +56,12 @@ changelog:
       - '^docs:'
       - '^test:'
 
+signs:
+  - cmd: cosign
+    signature: "${artifact}.sig"
+    args: ["sign-blob", "--oidc-issuer=https://token.actions.githubusercontent.com", "--output-signature=${artifact}.sig", "${artifact}"]
+    artifacts: all
+
 dockers:
   - 
     id: linux-amd64
@@ -101,6 +107,11 @@ dockers:
 
 
 release:
+  ## Add Signature to release page
+  extra_files:
+  - glob: dist/*.sig
+
+
   # ## set github header and footer
   # header: |
   #   ## Docker
