@@ -107,9 +107,6 @@ dockers:
 
 
 release:
-  ## Add Signature to release page
-  extra_files:
-  - glob: dist/*.sig
 
 
   # ## set github header and footer
