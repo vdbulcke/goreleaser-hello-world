@@ -56,13 +56,23 @@ changelog:
       - '^docs:'
       - '^test:'
 
+##
+## Cosign
+##
 signs:
   - cmd: cosign
     signature: "${artifact}.sig"
     certificate: '${artifact}.pem'
     output: true
-    args: ["sign-blob", "--oidc-issuer=https://token.actions.githubusercontent.com", "--output-certificate=${artifact}.pem",  "--output-signature=${artifact}.sig", "${artifact}"]
+    args: 
+      - "sign-blob"
+      - "--oidc-issuer=https://token.actions.githubusercontent.com" 
+      - "--output-certificate=${artifact}.pem"
+      - "--output-signature=${artifact}.sig" 
+      - "${artifact}"
     artifacts: all
+
+
 
 dockers:
   - 
@@ -107,6 +117,17 @@ dockers:
     image_templates:
     - "ghcr.io/vdbulcke/goreleaser-hello-world-arm64:v{{ .Version }}"
 
+
+docker_signs:
+- cmd: cosign
+  env:
+  - COSIGN_EXPERIMENTAL=1
+  artifacts: all
+  output: true
+  args:
+  - 'sign'
+  - "--oidc-issuer=https://token.actions.githubusercontent.com" 
+  - '${artifact}'
 
 release:
 
